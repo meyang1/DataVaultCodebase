@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- make responsive breakpoints work -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Diagnoses</title>
+
+  <!-- Poppins font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    /* Base Reset & Variables */
+    :root {
+      /* Color Palette */
+      --primary: #2563eb;
+      --primary-light: #3b82f6;
+      --primary-dark: #1d4ed8;
+      --secondary: #0ea5e9;
+      --accent: #8b5cf6;
+      --success: #10b981;
+      --warning: #f59e0b;
+      --danger: #ef4444;
+      --gray-50: #f9fafb;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --gray-400: #9ca3af;
+      --gray-500: #6b7280;
+      --gray-600: #4b5563;
+      --gray-700: #374151;
+      --gray-800: #1f2937;
+      --gray-900: #111827;
+      --white: #ffffff;
+      /* Shadows */
+      --shadow-sm: 0 1px 2px 0 rgba(0,0,0,0.05);
+      --shadow:    0 1px 3px 0 rgba(0,0,0,0.1), 0 1px 2px 0 rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.1), 0 4px 6px -2px rgba(0,0,0,0.05);
+      --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.1), 0 10px 10px -5px rgba(0,0,0,0.04);
+      /* Typography */
+      --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      /* Spacing */
+      --spacing-1: 0.25rem;
+      --spacing-2: 0.5rem;
+      --spacing-3: 0.75rem;
+      --spacing-4: 1rem;
+      --spacing-6: 1.5rem;
+      --spacing-8: 2rem;
+      --spacing-12: 3rem;
+      /* Border Radius */
+      --radius-sm: 0.125rem;
+      --radius: 0.25rem;
+      --radius-md: 0.375rem;
+      --radius-lg: 0.5rem;
+      --radius-xl: 0.75rem;
+      --radius-2xl: 1rem;
+      --radius-full: 9999px;
+      /* Transitions */
+      --transition: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-medium: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+      --transition-slow: 300ms cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    /* Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--gray-100);
+      color: var(--gray-800);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Layout */
+    .app-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header Styles */
+    .app-header {
+      background-color: var(--white);
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--spacing-4);
+    }
+    .top-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: var(--spacing-4);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .brand-section {
+      display: flex;
+      align-items: center;
+    }
+    .brand-logo {
+      width: 40px;
+      height: 40px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-right: var(--spacing-3);
+    }
+    .brand-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--gray-900);
+      margin: 0;
+    }
+
+    /* Navigation */
+    .main-nav {
+      padding-top: var(--spacing-4);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: var(--spacing-4);
+    }
+    .nav-links {
+      display: flex;
+      gap: var(--spacing-1);
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 500;
+      font-size: 0.875rem;
+      padding: var(--spacing-2) var(--spacing-4);
+      border-radius: var(--radius-md);
+      border: none;
+      cursor: pointer;
+      transition: all var(--transition);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--white);
+    }
+    .btn-primary:hover {
+      background-color: var(--primary-dark);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+    .btn-secondary {
+      background-color: var(--secondary);
+      color: var(--white);
+    }
+    .btn-secondary:hover {
+      background-color: #0991cf;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+    .btn-danger {
+      background-color: var(--danger);
+      color: var(--white);
+    }
+    .btn-danger:hover {
+      background-color: #dc2626;
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    /* Report Actions */
+    .report-actions {
+      display: flex;
+      gap: var(--spacing-2);
+      margin-top: var(--spacing-4);
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--spacing-6);
+      width: 100%;
+    }
+    .dashboard-card {
+      background-color: var(--white);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow);
+      padding: var(--spacing-6);
+      margin-bottom: var(--spacing-6);
+      transition: transform var(--transition-medium), box-shadow var(--transition-medium);
+    }
+    .fade-in {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .table-responsive {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      margin-top: var(--spacing-4);
+      margin-bottom: var(--spacing-4);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+    th, td {
+      padding: var(--spacing-3) var(--spacing-4);
+      text-align: left;
+    }
+    th {
+      background-color: var(--primary);
+      color: var(--white);
+      text-transform: uppercase;
+      font-size: 0.875rem;
+      letter-spacing: 0.5px;
+    }
+    tr:nth-child(even) { background-color: var(--gray-50); }
+    tr:hover             { background-color: var(--gray-100); }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-container">
+        <div class="top-header">
+          <div class="brand-section">
+            <div class="brand-logo">D</div>
+            <h1 class="brand-title">Diagnoses</h1>
+          </div>
+          <nav class="main-nav">
+            <div class="nav-links">
+              <a href="/admin" class="btn-secondary btn">Dashboard</a>
+              <a href="/admin/diagnoses/new" class="btn-primary btn">+ New Diagnosis</a>
+            </div>
+          </nav>
+        </div>
+        <!-- Search -->
+        <div class="report-actions">
+          <form method="get" action="/admin/diagnoses">
+            <input
+              type="text"
+              name="q"
+              value="<%= q %>"
+              placeholder="Search diagnoses..."
+            />
+            <button type="submit" class="btn-primary btn">Search</button>
+          </form>
+        </div>
+      </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content fade-in">
+      <div class="dashboard-card">
+        <div class="table-responsive">
+          <table>
+            <thead>
+              <tr>
+                <th>Visit ID</th>
+                <th>Disease</th>
+                <th>Severity</th>
+                <th>Risk Score</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% diagnoses.forEach(d => { %>
+                <tr>
+                  <td><%= d.VisitID %></td>
+                  <td><%= d.DiseaseName %></td>
+                  <td><%= d.Severity %></td>
+                  <td><%= d.RiskScore %></td>
+                  <td>
+                    <a
+                      href="/admin/diagnoses/<%= d.VisitID %>-<%= d.DiseaseID %>/edit"
+                      class="btn-secondary btn"
+                    >Edit</a>
+                    <a
+                      href="/admin/diagnoses/<%= d.VisitID %>-<%= d.DiseaseID %>/delete"
+                      onclick="return confirm('Delete this diagnosis?')"
+                      class="btn-danger btn"
+                    >Delete</a>
+                  </td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

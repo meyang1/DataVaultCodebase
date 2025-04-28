@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- make responsive breakpoints and mobile work -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= user.UserID ? 'Edit':'New' %> User</title>
+
+  <!-- Poppins font -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+    rel="stylesheet"
+  >
+
+  <style>
+    :root {
+      /* Colors */
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --secondary: #0ea5e9;
+      --gray-100: #f3f4f6;
+      --gray-200: #e5e7eb;
+      --gray-300: #d1d5db;
+      --white: #ffffff;
+      --danger: #ef4444;
+
+      /* Shadows */
+      --shadow:    0 1px 3px rgba(0,0,0,0.1), 0 1px 2px rgba(0,0,0,0.06);
+      --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.1), 0 2px 4px -1px rgba(0,0,0,0.06);
+
+      /* Typography & Spacing */
+      --font-family: 'Poppins', sans-serif;
+      --spacing-4: 1rem;
+      --spacing-6: 1.5rem;
+      --radius-md: 0.375rem;
+      --transition: 150ms cubic-bezier(0.4,0,0.2,1);
+    }
+
+    /* Reset */
+    * { margin:0; padding:0; box-sizing:border-box; }
+
+    body {
+      font-family: var(--font-family);
+      background-color: var(--gray-100);
+      color: #374151;
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    /* Layout */
+    .app-container {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Header */
+    .app-header {
+      background-color: #ffffff;
+      box-shadow: var(--shadow);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .header-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--spacing-4);
+    }
+    .top-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: var(--spacing-4);
+      border-bottom: 1px solid var(--gray-200);
+    }
+    .brand-section {
+      display: flex;
+      align-items: center;
+    }
+    .brand-logo {
+      width: 40px; height: 40px;
+      background: linear-gradient(135deg, var(--primary), var(--secondary));
+      border-radius: var(--radius-md);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--white);
+      font-weight: 700;
+      font-size: 1.25rem;
+      margin-right: var(--spacing-4);
+    }
+    .brand-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    /* Navigation */
+    .main-nav {
+      display: flex;
+      align-items: center;
+      gap: var(--spacing-4);
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 0.5rem 1rem;
+      border: none;
+      border-radius: var(--radius-md);
+      font-size: 0.875rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all var(--transition);
+      box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+      background: var(--primary);
+      color: var(--white);
+    }
+    .btn-secondary {
+      background: var(--secondary);
+    }
+    .btn-danger {
+      background: var(--danger);
+    }
+    .btn:hover {
+      background: var(--primary-dark);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+    .btn-secondary:hover {
+      background: #0991cf;
+    }
+    .btn-danger:hover {
+      background: #dc2626;
+    }
+
+    /* Main Content */
+    .main-content {
+      flex: 1;
+      max-width: 1400px;
+      margin: 0 auto;
+      padding: var(--spacing-6);
+    }
+    .dashboard-card {
+      background: #ffffff;
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow);
+      padding: var(--spacing-6);
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+    .dashboard-card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+    }
+    .fade-in {
+      animation: fadeIn 0.3s ease-out forwards;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Form */
+    form {
+      width: 100%;
+    }
+    .mb-4 {
+      margin-bottom: var(--spacing-4);
+    }
+    .mb-6 {
+      margin-bottom: var(--spacing-6);
+    }
+    label {
+      display: block;
+      margin-bottom: var(--spacing-2);
+      font-weight: 500;
+      color: #374151;
+    }
+    input, select {
+      width: 100%;
+      max-width: 400px;
+      padding: var(--spacing-4);
+      border: 1px solid var(--gray-300);
+      border-radius: var(--radius-md);
+      font-family: var(--font-family);
+      font-size: 0.875rem;
+      transition: border-color var(--transition), box-shadow var(--transition);
+    }
+    input:focus, select:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(37,99,235,0.1);
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- Header -->
+    <header class="app-header">
+      <div class="header-container">
+        <div class="top-header">
+          <div class="brand-section">
+            <div class="brand-logo">U</div>
+            <h1 class="brand-title">
+              <%= user.UserID ? 'Edit':'New' %> User
+            </h1>
+          </div>
+          <nav class="main-nav">
+            <div class="btn-secondary btn">
+              <a href="/admin/users" style="color:inherit; text-decoration:none;">
+                ← Back to Users
+              </a>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <!-- Form Card -->
+    <main class="main-content fade-in">
+      <div class="dashboard-card">
+        <form method="post" action="<%= action %>">
+          <div class="mb-4">
+            <label for="username">Username</label>
+            <input id="username" name="Username" value="<%= user.Username||'' %>" required>
+          </div>
+          <div class="mb-4">
+            <label for="password">PasswordHash</label>
+            <input id="password" name="PasswordHash" value="<%= user.PasswordHash||'' %>" required>
+          </div>
+          <div class="mb-4">
+            <label for="role">Role</label>
+            <select id="role" name="Role" required>
+              <% ['Admin','Doctor','Nurse','Staff'].forEach(r => { %>
+                <option value="<%= r %>" <%= user.Role===r?'selected':'' %>><%= r %></option>
+              <% }) %>
+            </select>
+          </div>
+          <div class="mb-4">
+            <label for="email">Email</label>
+            <input id="email" name="Email" type="email" value="<%= user.Email||'' %>" required>
+          </div>
+          <div class="mb-6">
+            <label for="hospital">Hospital</label>
+            <select id="hospital" name="HospitalID" required>
+              <% hospitals.forEach(h => { %>
+                <option value="<%= h.HospitalID %>" <%= user.HospitalID===h.HospitalID?'selected':'' %>><%= h.Name %></option>
+              <% }) %>
+            </select>
+          </div>
+          <button type="submit" class="btn-secondary btn">Save</button>
+        </form>
+      </div>
+    </main>
+  </div>
+</body>
+</html>
